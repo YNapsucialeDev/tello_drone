@@ -24,3 +24,7 @@
     - Make an Angular Interface to display dron state data
 - TODO 4:
     - Develop Angular Interface to stream "watchable" video data (flv, mpeg, mp4, whatever) with video HTML Element
+
+## MINOR WORK
+- MINOR 1:
+    - Translate code documentation to english
