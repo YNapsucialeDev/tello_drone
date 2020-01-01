@@ -16,8 +16,6 @@
 - Making an interface to control drone remotely
 
 ## TODO
-- TODO 1: 
-    - Study how video decoding works
 - TODO 2:
     - Implement web sockets to stream video raw data to browser interface
 - TODO 3:
@@ -26,5 +24,18 @@
     - Develop Angular Interface to stream "watchable" video data (flv, mpeg, mp4, whatever) with video HTML Element
 
 ## MINOR WORK
-- MINOR 1:
-    - Translate code documentation to english
+
+
+
+
+
+# LOG
+- 2 nov 2019
+    - Initial code project
+    - Reading Tello SDK Docs
+    - Implementing basic communication with drone via UDP
+    - Implementing h264 data stream with drone via UDP
+
+- 1 Jan 2020
+    - Translating code doc to english
+    - Implementing mux.js to decode h264 stream

@@ -46,19 +46,18 @@ droneSDK.send('command', 0, 'command'.length, DRONE_SDK_PORT, DRONE_IP_ADDRESS, 
 
 //on drone message handler
 droneSDK.on('message', message => {
-    //dado que la respuesta viene como buffer, utilizamos la función toString, para obtener información legible al humano
+    //DEBUG ONLY: stringify incoming array buffer, in order to have something "readable"
     console.log('TELLO CONNECTION STABLISHED!', message.toString());
 });
 
-//establecer conexión para poder obtener el estado actual del dron
-//dado que command inicia el sdk no es necesario enviarlo nuevamente a menos que se pierda la conexión,
-//por lo que podemos escuchar simplemente el puerto indicado (8890) para obtener los datos
+//establish connection to have current drone's state
+//due to "command" initialize communication, we don't have to send it again, unless connection is lost
+//this is the reason we can directly listen to 8890 for drone's info
 droneState.on('message', drone_state => {
     console.log('drone state : ', drone_state.toString());
 });
 
-//iniciamos el streaming del video del dron en el puerto 11111, para poder hacer esto debemos mandar el comando 'streamon'
-//enviamos el comando
+//we send h264 stream in arraybuffer form to port 11111 using command "streamon"
 droneSDK.send('streamon', 0, 'streamon'.length, DRONE_SDK_PORT, DRONE_IP_ADDRESS, function(error, drone_message){
     if(error)
     {
