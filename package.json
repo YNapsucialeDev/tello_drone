@@ -1,0 +1,28 @@
+{
+  "name": "tello_drone",
+  "version": "1.0.0",
+  "description": "Video broadcast from tello to web browser",
+  "main": "tello.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YNapsucialeDev/tello_drone.git"
+  },
+  "keywords": [
+    "drone",
+    "video",
+    "streaming"
+  ],
+  "author": "Yannick Napsuciale",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YNapsucialeDev/tello_drone/issues"
+  },
+  "homepage": "https://github.com/YNapsucialeDev/tello_drone#readme",
+  "dependencies": {
+    "dgram": "^1.0.1",
+    "ws": "^7.2.1"
+  }
+}

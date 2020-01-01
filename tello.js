@@ -32,6 +32,28 @@ droneState.bind(DRONE_STATE_PORT);
 var droneVideoFeed = udp.createSocket('udp4');
 droneVideoFeed.bind(DRONE_VIDEO_FEED_PORT);
 
+//creating web socket connection on port 5000 to send h264 raw data packages
+const WebSocket = require('ws');
+
+const webSocketServer = new WebSocket.Server({
+  port: 5000,
+  perMessageDeflate: {
+    zlibDeflateOptions: {
+      chunkSize: 1024,
+      memLevel: 7,
+      level: 3
+    },
+    zlibInflateOptions: {
+      chunkSize: 10 * 1024
+    },
+    clientNoContextTakeover: true,
+    serverNoContextTakeover: true,
+    serverMaxWindowBits: 10,
+    concurrencyLimit: 10,
+    threshold: 1024
+  }
+});
+
 //stablish connection with drone via udp
 droneSDK.send('command', 0, 'command'.length, DRONE_SDK_PORT, DRONE_IP_ADDRESS, function(error, drone_message){
     if(error)
@@ -69,6 +91,20 @@ droneSDK.send('streamon', 0, 'streamon'.length, DRONE_SDK_PORT, DRONE_IP_ADDRESS
         droneVideoFeed.on('message', video_feed => {
             //video video is a h264 feed
             console.log(video_feed,toString());
+
+            if(socketConnection == true)
+            {
+                webSocketServer.send(video_feed);
+            }
         });
     }
 });
+
+
+//check for websocket connection
+function socketConnection()
+{
+    webSocketServer.on('open', function open() {
+        return true;
+    });
+}
